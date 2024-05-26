@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/gitferry/bamboo/identity"
+	"github.com/gitferry/bamboo/types"
 )
 
 type Transaction struct {
@@ -16,10 +17,25 @@ type Transaction struct {
 	WriteSet []string
 }
 
-func NewTransaction(id int) *Transaction {
+func NewTransaction(id int, nodeid identity.NodeID) *Transaction {
 	tx := new(Transaction)
+	tx.NodeID = nodeid
 	tx.ID = strconv.Itoa(id)
 	tx.Timestamp = time.Now()
 
 	return tx
+}
+
+/**************************
+ *     Calvin Related     *
+ **************************/
+
+//type Sequencer struct {
+//}
+
+type Sequencer_Message struct {
+	NodeID  identity.NodeID
+	CurView types.View
+	TXN     *Transaction
+	//Txn     []*Transaction
 }
