@@ -11,8 +11,6 @@ import (
 	"time"
 
 	"forTest/identity"
-
-	"github.com/gitferry/bamboo/transport"
 )
 
 var configFile = flag.String("config", "config.json", "Configuration file for bamboo replica. Defaults to config.json.")
@@ -115,10 +113,12 @@ func GetTimer() time.Duration {
 	return time.Duration(time.Duration(Configuration.Timeout) * time.Millisecond)
 }
 
+/*
 // Simulation enable go channel transportation to simulate distributed environment
 func Simulation() {
 	*transport.Scheme = "chan"
 }
+*/
 
 // Load loads configuration from Configuration file in JSON format
 func (c *Config) Load() {

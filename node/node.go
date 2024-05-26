@@ -3,6 +3,7 @@ package node
 import (
 	"forTest/config"
 	"forTest/identity"
+	"reflect"
 	"sync"
 )
 
@@ -13,8 +14,8 @@ type Node interface {
 }
 
 type node struct {
-	id identity.NodeID
-
+	id          identity.NodeID
+	handles     map[string]reflect.Value
 	MessageChan chan interface{}
 	TxChan      chan interface{}
 	sync.RWMutex
@@ -29,5 +30,25 @@ func NewNode(id identity.NodeID) Node {
 		id:          id,
 		MessageChan: make(chan interface{}, config.Configuration.BufferSize),
 		TxChan:      make(chan interface{}, config.Configuration.BufferSize),
+		handles:     make(map[string]reflect.Value),
 	}
+}
+
+// Register a handle function for each message type
+func (n *node) Register(m interface{}, f interface{}) {
+	t := reflect.TypeOf(m)
+	fn := reflect.ValueOf(f)
+
+	if fn.Kind() != reflect.Func {
+		panic("handle function is not func")
+	}
+
+	if fn.Type().In(0) != t {
+		panic("func type is not t")
+	}
+
+	if fn.Kind() != reflect.Func || fn.Type().NumIn() != 1 || fn.Type().In(0) != t {
+		panic("register handle function error")
+	}
+	n.handles[t.String()] = fn
 }

@@ -1,6 +1,6 @@
 package mempool
 
-import "github.com/gitferry/bamboo/config"
+import "forTest/config"
 
 type MemPool struct {
 	*Backend

@@ -9,6 +9,7 @@ import (
 
 func initReplica(id identity.NodeID) {
 	r := replica.NewReplica(id)
+	r.Start()
 
 }
 
@@ -44,5 +45,5 @@ func main() {
 			fmt.Println(tx.Timestamp)
 		}
 	*/
-		
+
 }

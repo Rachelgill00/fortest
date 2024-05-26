@@ -3,7 +3,7 @@ package mempool
 import (
 	"forTest/message"
 
-	"github.com/gitferry/bamboo/config"
+	"forTest/config"
 )
 
 type Producer struct {

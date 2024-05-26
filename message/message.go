@@ -4,8 +4,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gitferry/bamboo/identity"
-	"github.com/gitferry/bamboo/types"
+	"forTest/identity"
+
+	"forTest/types"
 )
 
 type Transaction struct {
